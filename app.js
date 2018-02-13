@@ -39,8 +39,6 @@ const imgObject = {
             new BusItem ('water-can','images/water-can.jpg'),
             new BusItem ('wine-glass','images/wine-glass.jpg')
         );
-
-        // this.showItem();
     },
 
     getRandomItem: function () {
@@ -68,6 +66,8 @@ const imgObject = {
     }
 }
 
+imgObject.start();
+
 function BusItem (name, imageUrl) {
     this.name = name;
     this.imageUrl = imageUrl;
@@ -78,11 +78,11 @@ function BusItem (name, imageUrl) {
 
 BusItem.prototype.render = function () {
     const ele = document.createElement('img');
-    ele.src =  `images/${this.imageUrl}`;
+    ele.src =  `${this.imageUrl}`;
     ele.setAttribute('alt', this.name);
-    return ele;
+
+   
+    const list = document.getElementById("busMallItems");
+    list.appendChild(ele);
+
 };
-
-imgObject.start();
-
-// a click handler to capture the user's clicks
