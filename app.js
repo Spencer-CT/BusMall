@@ -25,6 +25,22 @@ const imgObject = {
             new BusItem ('water-can','images/water-can.jpg'),
             new BusItem ('wine-glass','images/wine-glass.jpg')
         );
+
+        imgObject.render();
+
+        const board = document.getElementById('busMallItems');
+        console.log(board);
+        board.addEventListener('click', function () {
+            const url = event.target.src;
+            const pathName = 'images/' + url.split('/').pop();
+            console.log(imgObject.bMI);
+            for (let i = 0; i < imgObject.bMI.length; i++) {
+                if (pathName === imgObject.bMI[i].imageUrl){
+                    imgObject.bMI[i].timesChosen++;
+                }
+                // console.log(imgObject.bMI[i]);
+            }
+        });
     },
 
     getRandomItem: function () {
@@ -38,11 +54,11 @@ const imgObject = {
             }
         }
         return selectedItems;
+        console.table(selectedItems);
     },
-    
     render: function () {
         const threeImg = this.getRandomItem();
-        const list = document.getElementById("busMallItems");
+        const list = document.getElementById('busMallItems');
 
         for (let j = 0; j < threeImg.length; j++ ){
             const ele = document.createElement('img');
