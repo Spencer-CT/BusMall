@@ -47,13 +47,25 @@ const imgObject = {
                 imgObject.clearBoard();
                 imgObject.render();
             }else if(imgObject.counter === 25){
+                imgObject.clearBoard();
                 alert('survey is over. this message will be replaced by a chart!!!');
+                
+                const chartCanvas = document.getElementById('chart');
+                const chartCtx = chartCanvas.getContext('2d');
+                
+                const chart = new Chart(chartCtx, {
+                    type: 'bar',
+                    data: {
+                        labels:['bag', 'banana', 'bathroom'],
+                        datasets: [{
+                            label: '# of votes ',
+                            data: [0, 1, 2 ],
+                        }]
+                    }
+                });
             }
             console.log(imgObject.counter);
-
         });
-
-        // create chart in place of the alert pop up
     },
 
     getRandomItem: function () {
@@ -86,6 +98,11 @@ const imgObject = {
     }
 
 };
+ 
+
+
+// create chart in place of the alert pop up
+// get the canvas to show chart
 
 // create while loop to register when 25 selection are completed
 
