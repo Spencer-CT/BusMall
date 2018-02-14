@@ -2,6 +2,7 @@
 
 const imgObject = {
     bMI: [],
+    counter: 0,
     start: function() {
         this.bMI.push(
             new BusItem ('bag','images/bag.jpg'),
@@ -39,10 +40,20 @@ const imgObject = {
                 }
                 console.log(imgObject.bMI[i]);
             }
-            imgObject.clearBoard();
-            imgObject.start();
-            imgObject.render();
+
+
+            imgObject.counter++;
+            if(imgObject.counter < 25){
+                imgObject.clearBoard();
+                imgObject.render();
+            }else if(imgObject.counter === 25){
+                alert('survey is over. this message will be replaced by a chart!!!');
+            }
+            console.log(imgObject.counter);
+
         });
+
+        // create chart in place of the alert pop up
     },
 
     getRandomItem: function () {
@@ -75,6 +86,8 @@ const imgObject = {
     }
 
 };
+
+// create while loop to register when 25 selection are completed
 
 
 imgObject.start();
