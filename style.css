@@ -1,4 +1,10 @@
 img {
     display: inline-block;
     width: 33%;
+    max-height: 200px;
+    contain: 
+    }
+}
+body{
+    background-color: coral
 }

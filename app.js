@@ -26,7 +26,6 @@ const imgObject = {
             new BusItem ('wine-glass','images/wine-glass.jpg')
         );
 
-        imgObject.render();
 
         const board = document.getElementById('busMallItems');
         console.log(board);
@@ -38,8 +37,11 @@ const imgObject = {
                 if (pathName === imgObject.bMI[i].imageUrl){
                     imgObject.bMI[i].timesChosen++;
                 }
-                // console.log(imgObject.bMI[i]);
+                console.log(imgObject.bMI[i]);
             }
+            imgObject.clearBoard();
+            imgObject.start();
+            imgObject.render();
         });
     },
 
@@ -66,8 +68,14 @@ const imgObject = {
             ele.setAttribute('alt', threeImg[j].name);
             list.appendChild(ele);
         }
+    },
+
+    clearBoard: function () {
+        document.getElementById('busMallItems').textContent = '';
     }
+
 };
+
 
 imgObject.start();
 imgObject.render();
