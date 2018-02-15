@@ -41,13 +41,13 @@ const imgObject = {
                 console.log(imgObject.bMI[i]);
             }
             imgObject.counter++;
-            if(imgObject.counter < 5){
+            if(imgObject.counter < 25){
                 imgObject.clearBoard();
                 imgObject.render();
-            }else if(imgObject.counter === 5){
+            }else if(imgObject.counter === 25){
                 imgObject.clearBoard();
                 alert('survey is over. this message will be replaced by a chart!!!');
-                imgObjectgit.makeChart();
+                imgObject.makeChart();
             };
         });   
         console.log(imgObject.counter);
