@@ -1,32 +1,48 @@
 // a constructor function that creates an object associated with each product, and has (at a minimum) properties for the name of the product (to be used for display purposes), the filepath to its image, the number of times it has been shown, and the number of times it has been clicked. You'll probably find it useful to create a property that contains a text string you can use as an ID in HTML, as well.
+function BusItem (name, imageUrl, timesChosen = 0) {
+    this.name = name;
+    this.imageUrl = imageUrl;
+    this.timesChosen = timesChosen;
+    this.timesShown = 0;
+    this.id = name;
+}
 
 const imgObject = {
     bMI: [],
     counter: 0,
     start: function() {
-        this.bMI.push(
-            new BusItem ('bag','images/bag.jpg'),
-            new BusItem ('banana','images/banana.jpg'),
-            new BusItem ('bathroom','images/bathroom.jpg'),
-            new BusItem ('boots','images/boots.jpg'),
-            new BusItem ('breakfast','images/breakfast.jpg'),
-            new BusItem ('bubblegum','images/bubblegum.jpg'),
-            new BusItem ('chair','images/chair.jpg'),
-            new BusItem ('cthulhu','images/cthulhu.jpg'),
-            new BusItem ('dog-duck','images/dog-duck.jpg'),
-            new BusItem ('dragon','images/dragon.jpg'),
-            new BusItem ('pen','images/pen.jpg'),
-            new BusItem ('pet-sweep','images/pet-sweep.jpg'),
-            new BusItem ('scissors','images/scissors.jpg'),
-            new BusItem ('shark','images/shark.jpg'),
-            new BusItem ('sweep','images/sweep.png'),
-            new BusItem ('tauntaun','images/tauntaun.jpg'),
-            new BusItem ('unicorn','images/unicorn.jpg'),
-            new BusItem ('usb','images/usb.gif'),
-            new BusItem ('water-can','images/water-can.jpg'),
-            new BusItem ('wine-glass','images/wine-glass.jpg')
-        );
-
+        if (localStorage.getItem('items')){
+            const itemObjZ = JSON.parse(localStorage.getItem('items'));
+            for (let i = 0; i < itemObjZ.length; i++){
+                const itemObj = itemObjZ[i];
+                
+                const item = new BusItem(itemObj.name, itemObj.imageUrl, itemObj.timesChosen);
+                this.bMI.push(item);
+            }
+        }else{
+            this.bMI.push(
+                new BusItem ('bag','images/bag.jpg'),
+                new BusItem ('banana','images/banana.jpg'),
+                new BusItem ('bathroom','images/bathroom.jpg'),
+                new BusItem ('boots','images/boots.jpg'),
+                new BusItem ('breakfast','images/breakfast.jpg'),
+                new BusItem ('bubblegum','images/bubblegum.jpg'),
+                new BusItem ('chair','images/chair.jpg'),
+                new BusItem ('cthulhu','images/cthulhu.jpg'),
+                new BusItem ('dog-duck','images/dog-duck.jpg'),
+                new BusItem ('dragon','images/dragon.jpg'),
+                new BusItem ('pen','images/pen.jpg'),
+                new BusItem ('pet-sweep','images/pet-sweep.jpg'),
+                new BusItem ('scissors','images/scissors.jpg'),
+                new BusItem ('shark','images/shark.jpg'),
+                new BusItem ('sweep','images/sweep.png'),
+                new BusItem ('tauntaun','images/tauntaun.jpg'),
+                new BusItem ('unicorn','images/unicorn.jpg'),
+                new BusItem ('usb','images/usb.gif'),
+                new BusItem ('water-can','images/water-can.jpg'),
+                new BusItem ('wine-glass','images/wine-glass.jpg')
+            );
+        }
 
         const board = document.getElementById('busMallItems');
         console.log(board);
@@ -41,18 +57,19 @@ const imgObject = {
                 console.log(imgObject.bMI[i]);
             }
             imgObject.counter++;
-            if(imgObject.counter < 25){
+            if(imgObject.counter < 5){
                 imgObject.clearBoard();
                 imgObject.render();
-            }else if(imgObject.counter === 25){
+            }else if(imgObject.counter === 5){
                 imgObject.clearBoard();
                 alert('survey is over. this message will be replaced by a chart!!!');
                 imgObject.makeChart();
+                imgObject.end();
             };
-        });   
+        });
         console.log(imgObject.counter);
     },
-     
+
     makeChart: function(){
         const names = [];
         const timesClicked = [];
@@ -64,7 +81,7 @@ const imgObject = {
         }
         console.log('names', names);
         console.log('times clicked', timesClicked);
-                
+
         const chart = new Chart(chartCtx, {
             type: 'bar',
             data: {
@@ -85,7 +102,9 @@ const imgObject = {
             }
         });
     },
-
+    end: function (){
+        localStorage.setItem('items', JSON.stringify(this.bMI));
+    },
     getRandomItem: function () {
         const selectedItems = [];
         console.table(selectedItems);
@@ -127,10 +146,3 @@ const imgObject = {
 imgObject.start();
 imgObject.render();
 
-function BusItem (name, imageUrl) {
-    this.name = name;
-    this.imageUrl = imageUrl;
-    this.timesChosen = 0;
-    this.timesShown = 0;
-    this.id = name;
-}
