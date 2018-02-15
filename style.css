@@ -1,4 +1,12 @@
 img {
     display: inline-block;
     width: 33%;
+    max-height: 300px;
+}
+
+body { background-color: coral;
+
+}
+main {
+    max-height: 400px;
 }

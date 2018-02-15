@@ -2,6 +2,7 @@
 
 const imgObject = {
     bMI: [],
+    counter: 0,
     start: function() {
         this.bMI.push(
             new BusItem ('bag','images/bag.jpg'),
@@ -26,7 +27,6 @@ const imgObject = {
             new BusItem ('wine-glass','images/wine-glass.jpg')
         );
 
-        imgObject.render();
 
         const board = document.getElementById('busMallItems');
         console.log(board);
@@ -38,7 +38,50 @@ const imgObject = {
                 if (pathName === imgObject.bMI[i].imageUrl){
                     imgObject.bMI[i].timesChosen++;
                 }
-                // console.log(imgObject.bMI[i]);
+                console.log(imgObject.bMI[i]);
+            }
+            imgObject.counter++;
+            if(imgObject.counter < 5){
+                imgObject.clearBoard();
+                imgObject.render();
+            }else if(imgObject.counter === 5){
+                imgObject.clearBoard();
+                alert('survey is over. this message will be replaced by a chart!!!');
+                imgObjectgit.makeChart();
+            };
+        });   
+        console.log(imgObject.counter);
+    },
+     
+    makeChart: function(){
+        const names = [];
+        const timesClicked = [];
+        const chartCanvas = document.getElementById('chart');
+        const chartCtx = chartCanvas.getContext('2d');
+        for (let i = 0; i < this.bMI.length; i++){
+            names.push(this.bMI[i].name);
+            timesClicked.push(this.bMI[i].timesChosen);
+        }
+        console.log('names', names);
+        console.log('times clicked', timesClicked);
+                
+        const chart = new Chart(chartCtx, {
+            type: 'bar',
+            data: {
+                labels: names,
+                datasets: [{
+                    label: '# of votes ',
+                    data: timesClicked,
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
             }
         });
     },
@@ -66,8 +109,20 @@ const imgObject = {
             ele.setAttribute('alt', threeImg[j].name);
             list.appendChild(ele);
         }
+    },
+
+    clearBoard: function () {
+        document.getElementById('busMallItems').textContent = '';
     }
+
 };
+
+
+// create chart in place of the alert pop up
+// get the canvas to show chart
+
+// create while loop to register when 25 selection are completed
+
 
 imgObject.start();
 imgObject.render();
