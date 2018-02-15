@@ -43,10 +43,10 @@ const imgObject = {
 
 
             imgObject.counter++;
-            if(imgObject.counter < 25){
+            if(imgObject.counter < 5){
                 imgObject.clearBoard();
                 imgObject.render();
-            }else if(imgObject.counter === 25){
+            }else if(imgObject.counter === 5){
                 imgObject.clearBoard();
                 alert('survey is over. this message will be replaced by a chart!!!');
                 
@@ -56,11 +56,20 @@ const imgObject = {
                 const chart = new Chart(chartCtx, {
                     type: 'bar',
                     data: {
-                        labels:['bag', 'banana', 'bathroom'],
+                        labels:['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'],
                         datasets: [{
                             label: '# of votes ',
-                            data: [0, 1, 2 ],
+                            data: imgObject.bMI.timesChosen,
                         }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        }
                     }
                 });
             }

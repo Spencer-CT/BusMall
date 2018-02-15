@@ -2,9 +2,11 @@ img {
     display: inline-block;
     width: 33%;
     max-height: 300px;
-    min-height: 50px;
 }
 
 body { background-color: coral;
 
+}
+main {
+    max-height: 400px;
 }
