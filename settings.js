@@ -4,6 +4,6 @@ settingsForm.addEventListener('submit', function () {
     const numItems = this['num-items'].value;
     const numRounds = this['num-rounds'].value;
 
-    const settings = {numFish: numFish, numRounds: numRounds};
+    const settings = {numItems: numItems, numRounds: numRounds};
     localStorage.setItem('settings', JSON.stringify(settings));
 });

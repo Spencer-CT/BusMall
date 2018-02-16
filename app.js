@@ -105,6 +105,18 @@ const imgObject = {
     end: function (){
         localStorage.setItem('items', JSON.stringify(this.bMI));
     },
+
+    getSettings: function () {
+        if (localStorage.getItem('settings')){
+            const savedSettings = JSON.parse(localStorage.getItem('settings'));
+            console.log(savedSettings);
+
+            this.numItems = parseInt(savedSettings.numItems);
+            this.numRounds = parseInt(savedSettings.numRounds);
+            console.log(this);
+        }
+    },
+
     getRandomItem: function () {
         const selectedItems = [];
         console.table(selectedItems);
