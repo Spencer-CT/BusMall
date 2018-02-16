@@ -15,7 +15,7 @@ const imgObject = {
             const itemObjZ = JSON.parse(localStorage.getItem('items'));
             for (let i = 0; i < itemObjZ.length; i++){
                 const itemObj = itemObjZ[i];
-                
+
                 const item = new BusItem(itemObj.name, itemObj.imageUrl, itemObj.timesChosen);
                 this.bMI.push(item);
             }
