@@ -15,7 +15,7 @@ const imgObject = {
             const itemObjZ = JSON.parse(localStorage.getItem('items'));
             for (let i = 0; i < itemObjZ.length; i++){
                 const itemObj = itemObjZ[i];
-                
+
                 const item = new BusItem(itemObj.name, itemObj.imageUrl, itemObj.timesChosen);
                 this.bMI.push(item);
             }
@@ -105,6 +105,18 @@ const imgObject = {
     end: function (){
         localStorage.setItem('items', JSON.stringify(this.bMI));
     },
+
+    getSettings: function () {
+        if (localStorage.getItem('settings')){
+            const savedSettings = JSON.parse(localStorage.getItem('settings'));
+            console.log(savedSettings);
+
+            this.numItems = parseInt(savedSettings.numItems);
+            this.numRounds = parseInt(savedSettings.numRounds);
+            console.log(this);
+        }
+    },
+
     getRandomItem: function () {
         const selectedItems = [];
         console.table(selectedItems);
