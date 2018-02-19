@@ -10,7 +10,11 @@ function BusItem (name, imageUrl, timesChosen = 0) {
 const imgObject = {
     bMI: [],
     counter: 0,
+
     start: function() {
+
+        this.getSettings();
+
         if (localStorage.getItem('items')){
             const itemObjZ = JSON.parse(localStorage.getItem('items'));
             for (let i = 0; i < itemObjZ.length; i++){
@@ -57,10 +61,10 @@ const imgObject = {
                 console.log(imgObject.bMI[i]);
             }
             imgObject.counter++;
-            if(imgObject.counter < 5){
+            if(imgObject.counter < 25){
                 imgObject.clearBoard();
                 imgObject.render();
-            }else if(imgObject.counter === 5){
+            }else if(imgObject.counter === 25){
                 imgObject.clearBoard();
                 alert('survey is over. this message will be replaced by a chart!!!');
                 imgObject.makeChart();
@@ -113,14 +117,14 @@ const imgObject = {
 
             this.numItems = parseInt(savedSettings.numItems);
             this.numRounds = parseInt(savedSettings.numRounds);
-            console.log(this);
+            console.log('hey hey', this);
         }
     },
 
     getRandomItem: function () {
         const selectedItems = [];
         console.table(selectedItems);
-        while (selectedItems.length < 3) {
+        while (selectedItems.length < this.numItems) {
             const randomNumber = Math.floor(Math.random() * this.bMI.length);
             const item = this.bMI[randomNumber];
             if (!selectedItems.includes(item)){
